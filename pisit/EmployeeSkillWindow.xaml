@@ -1,0 +1,37 @@
+﻿<Window x:Class="pisit.EmployeeSkillWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pisit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="Добавление навыка сотруднику" Height="300" Width="450">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Margin="10 10 0 0" Padding="0">Добавление навыка сотруднику</TextBlock>
+        <Label Target="{Binding ElementName=tb_skill_name}" Margin="10 10 0 0" Padding="0">Название навыка</Label>
+        <TextBox Margin="10 10 10 10" IsEnabled="False" Name="tb_skill_name" Text="{Binding SelectedSkill.Name}"></TextBox>
+        <Label TabIndex="{Binding ElementName=cb_level}" Margin="10 10 0 0" Padding="0">Уровень владения</Label>
+        <ComboBox Name="cb_level" Margin="10 10 10 10" SelectedItem="{Binding Path=EmployeeSkillLevel}">
+            <ComboBox.ItemsSource>
+                <x:Array Type="{x:Type sys:Int32}">
+                    <sys:Int32>0</sys:Int32>
+                    <sys:Int32>1</sys:Int32>
+                    <sys:Int32>2</sys:Int32>
+                    <sys:Int32>3</sys:Int32>
+                    <sys:Int32>4</sys:Int32>
+                    <sys:Int32>5</sys:Int32>
+                </x:Array>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 10 10 10">
+            <Button Margin="10" Click="Button_Click" Command="{Binding AddSkillToEmployee}">
+                Добавить
+            </Button>
+            <Button Click="Button_Click">
+                Отменить
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

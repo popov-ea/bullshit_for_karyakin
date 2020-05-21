@@ -1,0 +1,166 @@
+﻿<Window x:Class="pisit.EmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pisit"
+        Title="Учет сотрудников"
+        ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" Height="700" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <StackPanel Name="sp_employeeGrid" Visibility="Visible">
+                <TextBlock Margin="10 10 0 0" FontSize="15">
+                        Сотрудники
+                </TextBlock>
+                <StackPanel Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBox Width="300" Margin="5"></TextBox>
+                    <Button Margin="5" Padding="2" Height="20">
+                        <materialDesign:PackIcon Kind="Magnify" />
+                    </Button>
+                </StackPanel>
+                <DataGrid HorizontalAlignment="Stretch" x:Name="dgv_employees" AutoGenerateColumns="False" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ФИО" Width="1.3*" Binding="{Binding Path=FullName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Телефон" Width="0.6*" Binding="{Binding Path=Phone}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Отдел" Width="0.8*" Binding="{Binding Path=Department}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Должность" Width="0.8*" Binding="{Binding Path=Post}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Паспорт" Width="0.6*" Binding="{Binding Path=FullPassportNum}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Паспорт выдан" Width="1.5*" Binding="{Binding Path=FullPassportIssue}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <Grid x:Name="g_employeeForm" Visibility="Collapsed" Margin="30 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="20*"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.ColumnSpan="5" FontSize="18" Margin="0 20 0 0" Name="formHeader">
+                    Добавление сотрудника
+                </TextBlock>
+                
+                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_surname}" Margin="-5 0 0 10">Фамилия</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.Surname}" Width="300" Height="30" Name="tb_surname"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_name}" Margin="-5 0 0 10">Имя</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.Name}" Width="300" Height="30" Name="tb_name"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="8" Grid.Row="1" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_patronnymic}" Margin="-5 0 0 10">Отчество</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.Patronymic}" Width="300" Height="30" Name="tb_patronnymic"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_phone}" Margin="-5 0 0 10">Номер телефона</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.Phone}" Width="300" Height="30" Name="tb_phone"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_department}" Margin="-5 0 0 10">Отдел</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox ItemsSource="{Binding Path=Departments}" SelectedItem="{Binding Path=SelectedDepartment}" Width="250" Height="30" Name="tb_department"></ComboBox>
+                        <Button Margin="10 0 0 0" Click="btn_departments_Click">...</Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="8" Grid.Row="2" Grid.ColumnSpan="4"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_post}" Margin="-5 0 0 10">Должность</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox ItemsSource="{Binding Path=Posts}" SelectedItem="{Binding Path=SelectedPost}" Width="250" Height="30" Name="tb_post"></ComboBox>
+                        <Button Margin="10 0 0 0" Click="btn_post_Click">...</Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_phone}" Margin="-5 0 0 10">Серия паспорта</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.PassportSeries}" Height="30" Name="tb_passportSeries" Width="110"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_phone}" Margin="-5 0 0 10">Номер паспорта</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.PassportNum}" Height="30" Name="tb_passportNum" Width="140"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=dp_passportIssuedAt}" Margin="-5 0 0 15">Дата выдачи паспорта</Label>
+                    <DatePicker Name="dp_passportIssuedAt" SelectedDate="{Binding Path=SelectedEmployee.PassportIssuedAt}"></DatePicker>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="6"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_phone}" Margin="-5 0 0 10">Адрес регистрации</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.Address}" Width="460" Height="30" Name="tb_address"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="12"  HorizontalAlignment="Left">
+                    <Label Target="{Binding ElementName=tb_passportIssuedBy}" Margin="-5 0 0 10">Кем выдан паспорт</Label>
+                    <TextBox Text="{Binding Path=SelectedEmployee.PassportIssuedBy}" Width="945" Height="30" Name="tb_passportIssuedBy"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="8" >
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>Навыки</TextBlock>
+                        <DataGrid Width="565" Margin="0 5 0 0" ItemsSource="{Binding EmployeeSkills}" SelectedItem="{Binding SelectedEmployeeSkill}" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название навыка" Binding="{Binding Path=Skill.Name}" Width="450"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Уровень" Binding="{Binding Path=Level}" Width="*"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10 22 0 0">
+                        <Button IsEnabled="{Binding AddEmployeeSkillBtnEnabled}" Click="Add_Employee_Skill_Button_Click" Width="45">
+                            <materialDesign:PackIcon Kind="Plus" />
+                        </Button>
+                        <Button Margin="0 10 0 0" IsEnabled="{Binding RemoveEmployeeSkillBtnEnabled}" Command="{Binding DeleteSelectedEmployeeSkill}" Width="45">
+                            <materialDesign:PackIcon Kind="Minus" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="9" Grid.ColumnSpan="3">
+                    <Button Command="{Binding SaveEmployeeCommand}" Click="Save_Button_Click">
+                        Сохранить
+                    </Button>
+                    <Button Margin="10 0 0 0" Click="Cancel_Button_Click" Command="{Binding EnableEmployeeButtons}">
+                        Отменить
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <StackPanel HorizontalAlignment="Center">
+                <Button  Margin="0 70 0 0" Click="Add_Button_Click" Name="btn_add" Command="{Binding NewEmployeeAsSelected}" IsEnabled="{Binding AddEmployeeBtnEnabled}">Добавить</Button>
+                <Button Margin="0 10 0 0" Name="btn_edit" Click="btn_edit_Click" Command="{Binding DisableEmployeeButtons}" IsEnabled="{Binding ChangeEmployeeBtnEnabled}">Изменить</Button>
+                <Button Margin="0 45 0 0" Name="btn_delete" Command="{Binding DeleteSelectedEmployee}" IsEnabled="{Binding DeleteEmployeeBtnEnabled}">Удалить</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

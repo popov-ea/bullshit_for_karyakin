@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pisit", "pisit\pisit.csproj", "{8F3FEF28-1C29-4884-8C22-B4D83F1C6E80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F3FEF28-1C29-4884-8C22-B4D83F1C6E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3FEF28-1C29-4884-8C22-B4D83F1C6E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3FEF28-1C29-4884-8C22-B4D83F1C6E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3FEF28-1C29-4884-8C22-B4D83F1C6E80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B1C4A4B-7680-4B2D-A44B-CEE4AC4B4814}
+	EndGlobalSection
+EndGlobal
